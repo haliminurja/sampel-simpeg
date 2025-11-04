@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Master\MasterPeriodeController;
+use App\Http\Controllers\Admin\Master\MasterUnitController;
 use App\Http\Controllers\Admin\Person\PersonAsuransiController;
 use App\Http\Controllers\Admin\Person\PersonController;
 use App\Http\Controllers\Admin\Ref\RefEselonController;
@@ -124,6 +125,19 @@ Route::prefix('master')->group(function () {
             ->name('master.periode.store');
         Route::post('update/{id}', [MasterPeriodeController::class, 'update'])
             ->name('master.periode.update');
+    });
+
+    Route::prefix('unit')->group(function () {
+        Route::get('/', [MasterUnitController::class, 'index'])
+            ->name('master.unit.index');
+        Route::get('data', [MasterUnitController::class, 'list'])
+            ->name('master.unit.list');
+        Route::get('show/{id}', [MasterUnitController::class, 'show'])
+            ->name('master.unit.show');
+        Route::post('/store', [MasterUnitController::class, 'store'])
+            ->name('master.unit.store');
+        Route::post('update/{id}', [MasterUnitController::class, 'update'])
+            ->name('master.unit.update');
     });
 });
 

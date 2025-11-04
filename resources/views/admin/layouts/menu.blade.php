@@ -49,7 +49,7 @@
                 </div>
             </div>
             @php
-                $masterActive = request()->routeIs('admin.master.periode.*');
+                $masterActive = request()->routeIs('admin.master.periode.*') || request()->routeIs('admin.master.unit.*');
             @endphp
             <div data-kt-menu-trigger="click"
                  class="menu-item menu-accordion {{ $masterActive ? 'here show' : '' }}">
@@ -61,6 +61,10 @@
                     <a class="menu-link {{ request()->routeIs('admin.master.periode.*') ? 'active' : '' }}"
                        href="{{ route('admin.master.periode.index') }}">
                         <span class="menu-title px-4">Periode</span>
+                    </a>
+                    <a class="menu-link {{ request()->routeIs('admin.master.unit.*') ? 'active' : '' }}"
+                       href="{{ route('admin.master.unit.index') }}">
+                        <span class="menu-title px-4">Unit</span>
                     </a>
                 </div>
             </div>
