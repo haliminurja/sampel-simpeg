@@ -32,8 +32,6 @@ final class ThreatDetectionMiddleware
 
     private const array EXEMPT_PATHS = ['log-viewer/*'];
 
-    private const array ALLOWED_COUNTRIES = ['ID'];
-
     private readonly Blacklist $blackList;
 
     public function __construct(Blacklist $blackList)
@@ -47,7 +45,6 @@ final class ThreatDetectionMiddleware
         $ua = $this->sanitizeUserAgent($request->userAgent());
         $method = $request->method();
         $geo = $this->getGeo($ip);
-        $countryCode = strtoupper($geo['countryCode'] ?? '-');
         $info = UserAgent::getClientInfo($ua);
 
         if ($request->is(self::EXEMPT_PATHS)) {
@@ -86,10 +83,6 @@ final class ThreatDetectionMiddleware
 
         if ($this->blackList->isBlacklisted($ip, $ua)) {
             return $this->errorResponse($request, 429);
-        }
-
-        if (!in_array($countryCode, self::ALLOWED_COUNTRIES, true)) {
-            return $this->errorCountries($request);
         }
 
         $response = $next($request);
