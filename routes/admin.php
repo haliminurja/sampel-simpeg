@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Person\PersonAsuransiController;
 use App\Http\Controllers\Admin\Person\PersonController;
 use App\Http\Controllers\Admin\Ref\RefHubunganKeluargaController;
 use App\Http\Controllers\Admin\Ref\RefJenisAsuransiController;
@@ -73,6 +74,23 @@ Route::prefix('sdm')->group(function () {
             ->name('sdm.keluarga.destroy');
         Route::get('find/by/nik/{id}', [SdmKeluargaController::class, 'find_by_nik'])
             ->name('sdm.keluarga.find_by_nik');
+    });
+    
+    Route::prefix('asuransi')->group(function () {
+        Route::get('/{id}', [PersonAsuransiController::class, 'index'])
+            ->name('sdm.asuransi.index');
+        Route::get('data/{id}', [PersonAsuransiController::class, 'list'])
+            ->name('sdm.asuransi.list');
+        Route::get('show/{id}', [PersonAsuransiController::class, 'show'])
+            ->name('sdm.asuransi.show');
+        Route::post('/store', [PersonAsuransiController::class, 'store'])
+            ->name('sdm.asuransi.store');
+        Route::post('update/{id}', [PersonAsuransiController::class, 'update'])
+            ->name('sdm.asuransi.update');
+        Route::post('destroy/{id}', [PersonAsuransiController::class, 'destroy'])
+            ->name('sdm.asuransi.destroy');
+        Route::get('find/by/nik/{id}', [PersonAsuransiController::class, 'find_by_nik'])
+            ->name('sdm.asuransi.find_by_nik');
     });
 });
 

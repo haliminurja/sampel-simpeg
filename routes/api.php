@@ -21,4 +21,5 @@ Route::prefix('almt')->group(function () {
 Route::prefix('ref')->group(function () {
     Route::get('jenjang-pendidikan', [RefController::class, 'jenjangPendidikan'])->name('api.ref.jenjang-pendidikan');
     Route::get('hubungan-keluarga', [RefController::class, 'hubunganKeluarga'])->name('api.ref.hubungan-keluarga');
+    Route::get('jenis-asuransi', [RefController::class, 'jenisAsuransi'])->name('api.ref.jenis-asuransi');
 });
