@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\Person\PersonController;
 use App\Http\Controllers\Admin\Ref\RefHubunganKeluargaController;
+use App\Http\Controllers\Admin\Ref\RefJenisAsuransiController;
 use App\Http\Controllers\Admin\Ref\RefJenjangPendidikanController;
 use App\Http\Controllers\Admin\Sdm\PersonSdmController;
 use App\Http\Controllers\Admin\Sdm\SdmKeluargaController;
@@ -100,5 +101,18 @@ Route::prefix('ref')->group(function () {
             ->name('ref.hubungan-keluarga.store');
         Route::post('update/{id}', [RefHubunganKeluargaController::class, 'update'])
             ->name('ref.hubungan-keluarga.update');
+    });
+
+    Route::prefix('jenis-asuransi')->group(function () {
+        Route::get('/', [RefJenisAsuransiController::class, 'index'])
+            ->name('ref.jenis-asuransi.index');
+        Route::get('data', [RefJenisAsuransiController::class, 'list'])
+            ->name('ref.jenis-asuransi.list');
+        Route::get('show/{id}', [RefJenisAsuransiController::class, 'show'])
+            ->name('ref.jenis-asuransi.show');
+        Route::post('/store', [RefJenisAsuransiController::class, 'store'])
+            ->name('ref.jenis-asuransi.store');
+        Route::post('update/{id}', [RefJenisAsuransiController::class, 'update'])
+            ->name('ref.jenis-asuransi.update');
     });
 });
