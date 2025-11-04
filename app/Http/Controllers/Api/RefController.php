@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Services\Ref\RefHubunganKeluargaService;
 use App\Services\Ref\RefJenjangPendidikanService;
 use App\Services\Tools\ResponseService;
 use App\Services\Tools\TransactionService;
@@ -12,12 +13,19 @@ final class RefController extends Controller
 {
     public function __construct(
         private readonly RefJenjangPendidikanService $refJenjangPendidikanService,
+        private readonly RefHubunganKeluargaService  $refHubunganKeluargaService,
         private readonly TransactionService          $transactionService,
         private readonly ResponseService             $responseService,
-    )
-    {
-    }
+    ) {}
 
+    public function hubunganKeluarga(): JsonResponse
+    {
+        return $this->transactionService->handleWithShow(function () {
+            $data = $this->refHubunganKeluargaService->getListDataOrdered('id_hubungan_keluarga');
+
+            return $this->responseService->successResponse('Data berhasil diambil', $data);
+        });
+    }
     public function jenjangPendidikan(): JsonResponse
     {
         return $this->transactionService->handleWithShow(function () {
